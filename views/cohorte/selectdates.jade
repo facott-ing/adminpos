@@ -1,0 +1,234 @@
+extends ../layout
+block content
+    include ../directorHead
+    link(rel="stylesheet", href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css")
+    script(src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js")
+    .container
+        ul.breadcrumb
+            li: a(href="/director/profile") Inicio
+            li: a(href="/postgrado/#{postgradoi}") Postgrado
+            li.active Registro de cohorte
+        .row
+            .margin-auto
+                p.lead.text-center
+                    strong Creacion de cohortes
+                    span.text-primary &nbsp; #{postgradon} -
+                    span.text-primary: strong &nbsp; #{programa}
+                p.lead.text-center
+                    span.text-info Paso #2:
+                    span.text-muted &nbsp; Espesificacion de fechas
+                .well.bs-component
+                    form(method="POST", action="/cohorte/create", id="form-select-dates").form-horizontal
+                        input(type="hidden", name="programa", value="#{programa}")
+                        input(type="hidden", name="postgradoid", value="#{postgradoi}")
+                        input(type="hidden", name="postgradon", value="#{postgradon}")
+                        input(type="hidden", name="resolco", value="#{resolucion}")
+                        input(type="hidden", name="nombreco", value="#{nombre}")
+                        input(type="hidden", name="pensum", value="#{pensum}")
+                        input(type="hidden", name="freceso", value="01/01/2014")
+                        faildset
+                            legend Calendarizacion del postgrado
+                            .form-group
+                                label(for="inputIns", class="col-lg-2 control-label") Inicia Inscripciones
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-calendar
+                                        input(type="date", name="finscripciones", placeholder="DD/MM/YYYY", required).form-control
+                                    p.text-muted Seleccione la fecha en que se iniciara la recepcion solicitudes de inscripciones al postgrado
+                            .form-group
+                                label(for="inputLim", class="col-lg-2 control-label") Limite Inscripciones
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-calendar
+                                        input(type="date", name="flinscripciones", required, placeholder="DD/MM/YYYY").form-control
+                                    p.text-muted Seleccione la fecha limite en que se recibiran solicitudes de inscripciones al postgrado
+                            .form-group
+                                label(for="inputInterview", class="col-lg-2 control-label") Entrevistas
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-calendar
+                                        input(type="date", name="fentrevista", required, placeholder="DD/MM/YYYY").form-control
+                                    p.text-muted Seleccione la fecha estipulada en la que se realizaran las entrevistas a las personas que hicieron el pre-registro del postgrado
+                            .form-group
+                                label(for="inputResul", class="col-lg-2 control-label") Resultados
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-calendar
+                                        input(type="date", name="fresultados", required, placeholder="DD/MM/YYYY").form-control
+                                    p.text-muted Seleccione la fecha en la que se daran a conocer los resultados de las personas admitidas al postgrado
+                            .form-group
+                                label(for="inputResul", class="col-lg-2 control-label") Matricula
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-calendar
+                                        input(type="date", name="fmatricula", required, placeholder="DD/MM/YYYY").form-control
+                                    p.text-muted Seleccione la fecha estimada en la que los admitidos realicen el pago por concepto del valor total del curso de postgrado
+                            .form-group
+                                label(for="inputResul", class="col-lg-2 control-label") Inicio
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-calendar
+                                        input(type="date", name="fintroduccion", required, placeholder="DD/MM/YYYY").form-control
+                                    p.text-muted Fecha de inicio de clases
+
+                            .form-group
+                                label(for="inputResul", class="col-lg-2 control-label") Culmina
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-calendar
+                                        input(type="date", name="fcclases", required, placeholder="DD/MM/YYYY").form-control
+                                    p.text-muted Fecha de culminacion del postgrado
+                            .margin-botton
+                            legend Costos del postgrado
+                            .form-group
+                                label(for="inputResul", class="col-lg-2 control-label") Valor
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-money
+                                        input(type="number", name="valor", required).form-control
+                                    p.text-muted Valor monetario del postgrado
+                            .form-group
+                                label(for="inputResul", class="col-lg-2 control-label") Valor otros
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-money
+                                        input(type="number", name="otro", required).form-control
+                                    p.text-muted valor de gastos distintos al del valor total del postgrado
+                            legend
+                            .form-group
+                                .col-lg-10
+                                    a(href="/postgrado/#{postgradoi}").btn.btn-default.margin-right-1
+                                        i.fa.fa-times-circle
+                                        | &nbsp; Cancelar
+                                    button(type="submit", class="btn btn-primary")
+                                        i.fa.fa-save
+                                        | &nbsp; Guardar cohorte
+    script(type="text/javascript").
+        $(document).ready(function() {
+            $('#form-select-dates')
+
+                .bootstrapValidator({
+                    excluded: ':disabled',
+                    feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        finscripciones: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Seleccione una fecha.'
+                                },
+                                date: {
+                                    format: 'DD/MM/YYYY',
+                                    message: 'Formato de fecha invalido'
+                                }
+                            }
+                        },
+                        flinscripciones: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Seleccione una fecha.'
+                                },
+                                date: {
+                                    format: 'DD/MM/YYYY',
+                                    message: 'Formato de fecha invalido'
+                                }
+                            }
+                        },
+                        fentrevista: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Seleccione una fecha.'
+                                },
+                                date: {
+                                    format: 'DD/MM/YYYY',
+                                    message: 'Formato de fecha invalido'
+                                }
+                            }
+                        },
+                        fresultados: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Seleccione una fecha.'
+                                },
+                                date: {
+                                    format: 'DD/MM/YYYY',
+                                    message: 'Formato de fecha invalido'
+                                }
+                            }
+                        },
+                        fmatricula: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Seleccione una fecha.'
+                                },
+                                date: {
+                                    format: 'DD/MM/YYYY',
+                                    message: 'Formato de fecha invalido'
+                                }
+                            }
+                        },
+                        fintroduccion: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Seleccione una fecha.'
+                                },
+                                date: {
+                                    format: 'DD/MM/YYYY',
+                                    message: 'Formato de fecha invalido'
+                                }
+                            }
+                        },
+                        fcclases: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Seleccione una fecha.'
+                                },
+                                date: {
+                                    format: 'DD/MM/YYYY',
+                                    message: 'Formato de fecha invalido'
+                                }
+                            }
+                        },
+                        valor: {
+                            validators: {
+                                notEmpty: {
+                                },
+                                integer: {}
+
+                            }
+                        },
+                        otro: {
+                            validators: {
+                                notEmpty: {
+                                },
+                                integer: {}
+
+                            }
+                        }
+
+
+
+                    }
+            });
+        });

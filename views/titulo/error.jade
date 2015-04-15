@@ -1,0 +1,20 @@
+//
+   Created by fabiancote on 7/16/14.
+extends ../layout
+block content
+    include ../directorHead
+    .container
+        ul.breadcrumb
+            li: a(href="/director/profile") Inicio
+        .row
+            .margin-auto
+                p.lead.text-center
+                    strong Asignacion de titulos al docente
+                p.error.text-center # Error
+                p.lead.text-center
+                    | #{message}
+                    strong.text-danger  #{tnombre}
+                    | , verifique en el sistema o intente de nuevo.
+                p.text-center
+                    a(href="/docente/#{docente}/#{asignatura}").btn.btn-default Intentar de nuevo
+    br

@@ -1,0 +1,41 @@
+extends ../layout
+block content
+    include ../adminHead
+    .container
+        ul.breadcrumb
+            li: a(href="/administrador/profile") Inicio
+            li: a(href="/programa/#{programa.id}") Programa
+            li.active Seleccionar director
+        .row
+            .margin-auto
+                p.lead.text-center
+                    strong Asignar un director al programa
+                    br
+                    span.text-primary &nbsp; #{programa.nombre}
+                p.lead.text-center
+                    span.text-muted &nbsp; Seleccione una de las siguientes opciones
+                h5.text-center.margin-botton
+                    a(href="/programa/#{programa.id}/view").btn.btn-default.btn-xs
+                        i.fa.fa-chevron-circle-left
+                        | &nbsp; Volver al programa
+                .margin-botton
+                .well.bs-component
+                    form(method="POST", action="/director/select").form-horizontal
+                        input(type="hidden", name="programa", value="#{programa.id}")
+                        legend Seleccion del director
+                        p.text-muted Seleccione de la siguente lista el director que desea asignar en el programa
+                        -if (directorscount > 0){
+                            .list-group.scroll-list
+                            each director in directores
+                                .list-group-item
+                                    input(type="radio", name="director", value="#{director.id}")
+                                    span.text-margin-left #{director.nombre}
+                                legend
+                                    .form-group
+                                        h5.text-center
+                                            button(type="submit").btn.btn-primary
+                                                i.fa.fa-plus
+                                                | &nbsp; Asignar director
+                        -}else{
+                            p.text-center.text-info No existen directores disponibles para ser seleccionados
+                        -}

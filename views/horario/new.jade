@@ -1,0 +1,96 @@
+extends ../layout
+block content
+    include ../directorHead
+    .container
+        ul.breadcrumb
+            li: a(href="/director/profile") Inicio
+            li: a(href="/asignatura/#{asignatura.id}") Materia
+            li.active Creacion de horario
+        .row
+            .margin-auto
+                p.lead.text-center
+                    strong Creacion de Horario de clases
+                    span.text-primary &nbsp; #{asignatura.nombre}
+                p.lead.text-center
+                    span.text-muted &nbsp; Informacion del horario de clase
+                h5.text-center.margin-botton
+                    a(href="/asignatura/#{asignatura.id}").btn.btn-default.btn-xs
+                        i.fa.fa-chevron-circle-left
+                        | &nbsp; Volver a la asignatura
+                .well.bs-component
+                    form(method="POST", action="/horario/create", id="form-new-hora").form-horizontal
+                        input(type="hidden", name="asignatura", value="#{asignatura.id}")
+                        legend Crear horario de clases
+                        fieldset
+                            .form-group
+                                label(for="inputDia", class="col-lg-2 control-label") Dia
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-calendar-o
+                                        select(name="dia", required).form-control
+                                            each dia in dias
+                                                option(value="#{dia}") #{dia}
+                                    p.text-muted Dia de la semana que se realizara la clase
+                            .form-group
+                                label(for="inputHorai", class="col-lg-2 control-label") Hora inicia
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-clock-o
+                                        select(name="hora", required).form-control
+                                            each hora in horas
+                                                option(value="#{hora}") #{hora}h
+                                    p.text-muted Hora del dia que inicia la clase
+                            .form-group
+                                label(for="inputHorat", class="col-lg-2 control-label") Hora Termina
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-clock-o
+                                        select(name="duracion", required).form-control
+                                            each hora in horas
+                                                option(value="#{hora}") #{hora}h
+                                    p.text-muted Hora del dia en que termina la clase
+
+                            .form-group
+                                label(for="inputHorat", class="col-lg-2 control-label") Lugar
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-institution
+                                        input(type="text", name="lugar", required, autocomplete="off").form-control
+                                    p.text-muted Lugar de la institucion donde se realizara la clase
+
+                            .form-group
+                                h5.text-center
+                                    button(type="submit").btn.btn-primary
+                                        i.fa.fa-plus
+                                        | &nbsp; Agregar Horario de clase
+    script(type="text/javascript").
+        $(document).ready(function() {
+            $('#form-new-hora')
+                .bootstrapValidator({
+                    feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        lugar: {
+                            validators: {
+                                notEmpty: {
+                                },
+                                stringLength: {
+                                    min: 6,
+                                    max: 30
+                                }
+                            }
+                        }
+                    }
+            });
+        });

@@ -1,0 +1,261 @@
+extends ../layout
+block content
+    include ../directorHead
+    .container
+        ul.breadcrumb
+            li: a(href="/director/profile") Inicio
+            li: a(href="/asignatura/#{asignatura.id}") Materia
+            li.active Informacion del docente
+        .row
+            .margin-auto
+                p.lead.text-center
+                    strong Informacion del docente
+                    span.text-primary &nbsp; #{datos.nombres} #{datos.apellidos} -
+                    strong.text-primary &nbsp; #{programa.nombre}
+                p.lead.text-center
+                    span.text-muted &nbsp; Informacion general del docente
+                h5.text-center.margin-botton
+                    a(href="/asignatura/#{asignatura.id}").btn.btn-default.btn-xs
+                        i.fa.fa-chevron-circle-left
+                        | &nbsp; Volver a la materia
+
+            .col-lg-6
+                .panel.panel-default
+                    .panel-heading
+                        h5
+                            i.fa.fa-user
+                            |&nbsp; Datos personales del docente
+                    .panel-body
+                        form(method="POST", action="/docente/edit", id="form-edit-tea").form-horizontal
+                            input(type="hidden", name="_method", value="PUT")
+                            input(type="hidden", name="asignatura", value="#{asignatura.id}")
+                            input(type="hidden", name="docente", value="#{docente.id}")
+                            input(type="hidden", name="persona", value="#{datos.id}")
+                            input(type="hidden", name="case", value="1")
+
+                            fieldset
+                                .form-group
+                                    label(for="inputNombre", class="col-lg-2 control-label") Nombres
+                                    .col-lg-10
+
+                                        .input-group
+                                            span.input-group-addon
+                                                i.fa.fa-user
+                                            input(type="text", name="nombres", value="#{datos.nombres}", required).form-control
+                                        p.lead.text-muted Nombre del docente
+                                .form-group
+                                    label(for="inputApellido", class="col-lg-2 control-label") Apellidos
+                                    .col-lg-10
+
+                                        .input-group
+                                            span.input-group-addon
+                                                i.fa.fa-user
+                                            input(type="text", name="apellidos", value="#{datos.apellidos}", required).form-control
+                                        p.lead.text-muted Apellidos del docente
+                                .form-group
+                                    label(for="inputidentidad", class="col-lg-2 control-label") Documento
+                                    .col-lg-10
+
+                                        .input-group
+                                            span.input-group-addon
+                                                i.fa.fa-bookmark
+                                            input(type="text", name="documento", value="#{datos.documento}", required).form-control
+                                        p.lead.text-muted Numero de identificacion del docente
+                                .form-group
+                                    label(for="inputidentidad", class="col-lg-2 control-label") Tipo documento
+                                    .col-lg-10
+
+                                        .input-group
+                                            span.input-group-addon
+                                                i.fa.fa-bookmark
+                                            select(name="tipodoc").form-control
+                                                case datos.tipo_documento
+                                                    when 'Cedula de ciudadania'
+                                                        option(value="Cedula de ciudadania", selected="true") Cedula de ciudadania
+                                                        option(value="Pasaporte") Pasaporte
+                                                        option(value="Cedula de Extranjeria") Cedula de Extranjeria
+                                                    when 'Pasaporte'
+                                                        option(value="Cedula de ciudadania") Cedula de ciudadania
+                                                        option(value="Pasaporte", selected="true") Pasaporte
+                                                        option(value="Cedula de Extranjeria") Cedula de Extranjeria
+                                                    when 'Cedula de Extranjeria'
+                                                        option(value="Cedula de ciudadania") Cedula de ciudadania
+                                                        option(value="Pasaporte") Pasaporte
+                                                        option(value="Cedula de Extranjeria", selected="true") Cedula de Extranjeria
+
+                                        p.lead.text-muted tipo de documento
+                                .form-group
+                                    label(for="inputidentidad", class="col-lg-2 control-label") Email
+                                    .col-lg-10
+
+                                        .input-group
+                                            span.input-group-addon
+                                                i.fa.fa-send-o
+                                            input(type="email", name="email", value="#{datos.email}", required).form-control
+                                        p.lead.text-muted Correo electronico de contacto del docente
+                                .form-group
+                                    label(for="inputidentidad", class="col-lg-2 control-label") Telefono
+                                    .col-lg-10
+
+                                        .input-group
+                                            span.input-group-addon
+                                                i.fa.fa-phone
+                                            input(type="number", name="telefono", value="#{datos.telefono}", required).form-control
+                                        p.lead.text-muted Numero telefonico de contacto
+
+
+
+                                .form-group
+                                    h5.text-center
+                                        button(type="submit").btn.btn-primary
+                                            i.fa.fa-save
+                                            | &nbsp; Guardar Cambios
+
+
+            .col-lg-6
+                .panel.panel-default
+                    .panel-heading
+                        h5
+                            i.fa.fa-user
+                            |&nbsp; Datos Academicos del docente
+                    .panel-body
+                        .form-horizontal
+
+                            fieldset
+                                .form-group
+                                    .profileAvatar
+                                        .avatar
+                                            -if (avatar != false){
+                                                img(src="/images/uploads/people/#{docente.id}.jpg", title="#{datos.nombres} #{datos.apellidos}", class="portrait")
+                                            -}else{
+                                                img(src="/images/uploads/people/empty.jpg", title="#{datos.nombres} #{datos.apellidos}", class="portrait")
+                                            -}
+                                        .btnupload
+                                            script(type="text/javascript", src="/bootstrap/js/bootstrap-filestyle.min.js")
+                                            form(enctype =  "multipart/form-data", role="form", method="POST", action="/uploader")
+                                                input(type="hidden", name="estudiante", value="#{docente.id}")
+                                                input(type="hidden", name="url", value="/docente/#{docente.id}/#{asignatura.id}")
+
+                                                .form-group
+                                                    .row
+                                                        .col-md-4
+                                                            input(type="file", class="filestyle", data-input="false", name="userPhoto", accept="image/jpeg")
+                                                    .row
+                                                        .col-md-4
+                                                            h5.text-center
+                                                                button(type="submit").btn.btn-primary.btn-sm.margin-btn-upload-student
+                                                                    i.fa.fa-cloud-upload
+                                                                    | &nbsp; Subir Foto
+                                            script(type="text/javascript").
+                                                $(":file").filestyle({input: false});
+
+                                    label(for="inputCodigo", class="col-lg-2 control-label") Codigo
+                                    .col-lg-10
+
+                                        .input-group
+                                            h4.text-primary #{docente.codigo}
+                                        p.text-muted Codigo identificador en el sistema del docente
+                                        .input-group
+                                            a(href="/docente/changepass/#{docente.id}/#{asignatura.id}").btn.btn-default.btn-xs
+                                                i.fa.fa-refresh
+                                                | &nbsp; Cambiar Contraseña
+                            .margin-botton
+                            legend Titulos academicos del docente
+                                a(href="/titulo/new/#{docente.id}/#{asignatura.id}").btn.btn-primary.btn-xs.pull-right
+                                    i.fa.fa-plus
+                                    |&nbsp; Agregar Titulacion
+
+
+                            fieldset
+
+                                .list-group
+                                    -if (!titulos[0]){
+                                        p.text-center.text-info El docente no tiene registrado estudios
+                                    -}else{
+                                        each titulo in titulos
+                                            .list-group-item
+                                                .list-group-item-heading
+                                                    h4 #{titulo.titulo}
+                                                .list-group-item-text
+                                                    h5.text-muted #{titulo.universidad}
+                                                .list-group-item-text.text-right
+                                                    a(href="/titulo/delete/#{titulo.id}/#{asignatura.id}").btn.btn-danger.btn-xs
+                                                        i.fa.fa-times
+                                                        |&nbsp; Eliminar
+                                    -}
+    script(type="text/javascript").
+        $(document).ready(function() {
+            $('#form-edit-tea')
+                .find('[name="tipodoc"]')
+                    .change(function(e) {
+                        // revalidate the language when it is changed
+                        $('#form-add-preins').bootstrapValidator('revalidateField', 'tipodoc');
+                    })
+
+                    .end()
+                .bootstrapValidator({
+                    excluded: ':disabled',
+                    feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        nombres: {
+                            validators: {
+                                notEmpty: {
+                                },
+                                stringLength: {
+                                    min: 3,
+                                    max: 30
+                                }
+                            }
+                        },
+                        apellidos: {
+                            validators: {
+                                notEmpty: {
+                                },
+                                stringLength: {
+                                    min: 3,
+                                    max: 30
+                                }
+                            }
+                        },
+                        tipodoc: {
+                            validators: {
+                                notEmpty: {
+                                    message: 'Seleccione un tipo de documento.'
+                                }
+                            }
+                        },
+                        numdoc: {
+                            validators: {
+                                notEmpty: {
+                                },
+                                stringLength: {
+                                    min: 6,
+                                    max: 30
+                                }
+                            }
+                        },
+                        email: {
+                            validators: {
+                                notEmpty: {},
+                                emailAddress :{
+
+                                }
+                            }
+                        },
+                        telefono: {
+                            validators: {
+                                notEmpty: {
+                                },
+                                stringLength: {
+                                    min: 6,
+                                    max: 20
+                                }
+                            }
+                        }
+                    }
+            });
+        });

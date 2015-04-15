@@ -1,0 +1,22 @@
+//
+   Created by fabiancote on 7/17/14.
+extends ../layout
+block content
+    include ../directorHead
+    .container
+        ul.breadcrumb
+            li: a(href="/director/profile") Inicio
+            li.active Creacion de Cohorte
+        .row
+            .margin-auto
+                p.lead.text-center
+                    strong Creacion de cohorte
+                p.error.text-center # Error
+                p.lead.text-center
+                    strong #{title}
+                    | , #{msg}
+                p.text-center
+                    a(href="#{btn}").btn.btn-default Regresar
+    br
+
+

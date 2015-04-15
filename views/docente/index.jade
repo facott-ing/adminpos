@@ -1,0 +1,36 @@
+extends ../layout
+block content
+    include ../directorHead
+    .container
+        ul.breadcrumb
+            li: a(href="/director/profile") Inicio
+            li: a(href="/asignatura/#{asignatura.id}") Asignatura
+            li.active Asignar docente
+        .row
+            .margin-auto
+                p.lead.text-center
+                    strong Asignar un docente a la materia
+                    span.text-primary &nbsp; #{asignatura.nombre}
+                p.lead.text-center
+                    span.text-muted &nbsp; Seleccione una de las siguientes opciones
+                h5.text-center.margin-botton
+                    a(href="/asignatura/#{asignatura.id}").btn.btn-default.btn-xs
+                        i.fa.fa-chevron-circle-left
+                        | &nbsp; Volver a la materia
+                .well.bs-comment
+                    legend Asignacion de docentes a materias
+                    .margin-botton
+                    fieldset
+                        .form-group
+                            p.text-center
+                                a(href="/docente/create/#{asignatura.id}").btn.btn-primary.btn-sm
+                                    i.fa.fa-plus
+                                    | &nbsp; Agregar un nuevo docente
+                            p.text-muted.text-center Se ingresa un docente nuevo al sistema y se registra a la asignatura
+                        .margin-botton
+                        .form-group
+                            p.text-center
+                                a(href="/docente/select/#{asignatura.id}").btn.btn-default.btn-sm
+                                    i.fa.fa-bars
+                                    | &nbsp; Seleccionar de una lista de docentes
+                            p.text-muted.text-center Se escoje de una lista de docentes ya registrados al que va ser registrado en la materia como profesor

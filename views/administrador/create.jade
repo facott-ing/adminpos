@@ -1,0 +1,24 @@
+extends ../layout
+block content
+    .container
+        .row
+            .well.bs-component
+                form(method="POST", action="/administrator/beginningnoftimes").form-horizontal
+                    faildset
+                        legend
+                        .form-group
+                            label(for="inputResolucion", class="col-lg-2 control-label") Codigo
+                            .col-lg-10
+
+                                .input-group
+                                    span.input-group-addon
+                                        i.fa.fa-key
+                                    input(type="password", name="codigo", autocomplete="off", autofocus, required).form-control
+                                p.text-muted Codigo de autirizacion para el inicio del sistema
+                        .form-group
+                            .col-lg-10.col-lg-offset-2
+
+                                button(type="submit", class="btn btn-default")
+                                    i.fa.fa-anchor
+                                    | &nbsp; Inicio del sistema
+

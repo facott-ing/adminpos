@@ -1,0 +1,248 @@
+
+html,body{
+    padding: 0;
+    margin: 0;
+}
+.text-bg{
+    color: #f5f5f5;
+    text-shadow: 2px 2px 2px #000000;
+}
+.bg{
+    background-color: #F9F9F9;
+}
+.bg-black{
+    background-color: #FFFFFF;
+}
+.fix-top{
+    margin-top: 56px;
+}
+button{
+    border: 0;
+}
+.text-size{
+    font-size: 30pt;
+}
+.text-size-24{
+    font-size: 24pt;
+}
+.text-size-18{
+    font-size: 18pt;
+}
+.text-size-14{
+    font-size: 14pt;
+}
+.text-size-12{
+    font-size: 12pt;
+}
+.text-size-11{
+    font-size: 11pt;
+}
+.text-size-10{
+    font-size: 10pt;
+}
+.color-success{
+    background-color: #28b62c;
+}
+.margin-left-1{
+    margin-left: 14px;
+}
+.margin-right-1{
+    margin-right: 30px;
+}
+.margin-auto{
+    width: 50%;
+    margin: 0 auto;
+}
+.margin-auto-7{
+    width: 70%;
+    margin: 0 auto;
+}
+.margin-auto-8{
+    width: 80%;
+    margin: 0 auto;
+}
+.margin-auto-9{
+    width: 90%;
+    margin: 0 auto;
+}
+.error{
+    font-size: 80pt;
+    font-style: italic;
+    color:#dca7a7;
+}
+.warning-msg{
+    font-size: 80pt;
+    font-style: italic;
+    color:#e38d13;
+}
+.margin-botton{
+    margin-bottom: 40px;
+}
+.scroll-list{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: 200px;
+}
+.scroll-list-x{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: 500px;
+}
+.scroll-list-large{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: 700px;
+}
+.scroll-list-350{
+    overflow-x: hidden;
+    overflow-y: scroll;
+    max-height: 350px;
+}
+.badge-fix{
+    margin-top: 10px;
+}
+.font-size-fix-label{
+    font-size: 9pt;
+}
+.box-shadown{
+    -moz-box-shadow: inset 0 0 5px #888;
+    -webkit-box-shadow: inset 0 0 5px#888;
+    box-shadow: inner 0 0 5px #888;
+}
+.text-margin-left{
+    margin-left: 20px;
+}
+.margin-botton-none{
+    margin-bottom: 0;
+}
+
+.list-dates li{
+    display: inline-block;
+    padding: 8px 10px;
+}
+.input-size-small{
+    width: 30px;
+}
+#form-add-preins .selectContainer .form-control-feedback {
+    /* Adjust feedback icon position */
+    right: -15px;
+}
+.tableinspace td{
+    margin:5px 20px;
+}
+
+.personAvatar{
+    float: right;
+    margin-top: -170px;
+    width: 160px;
+    height: 240px;
+}
+
+.profileAvatar{
+    width: 140px;
+    height: 240px;
+    margin: 0 auto;
+}
+.profileAvatar-alt{
+    width: 140px;
+    height: 160px;
+    margin: 0 auto;
+}
+.developerAvatar{ margin-top: 20px; margin-left: 20px;}
+.developerAvatar a{ margin: 0px 5px;}
+.developerAvatar a:hover{ color: #111111;}
+.developerAvatar img{
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius:50%;
+}
+.developerAvatar span{ margin-left: 20px;}
+
+.personAvatar > .avatar, .profileAvatar > .avatar, .profileAvatar-alt > .avatar{
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius:50%;
+}
+.personAvatar > .avatar img, .profileAvatar > .avatar img, .profileAvatar-alt > .avatar img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: auto;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+.personAvatar img.portrait, .profileAvatar img.portrait, .profileAvatar-alt img.portrait{
+    width: 100%;
+    height: auto;
+}
+.btnupload{
+    margin-top: 8px;
+}
+.margin-btn-upload-student{
+    margin-left: 34px;
+}
+.btn-printReport-Student{
+    margin-left: 40px;
+    position: absolute;
+}
+
+.table-model{
+    background-color: #E5E1EA;
+    border: 1px solid #C8BFD3;
+}
+.float-right{ float: right;}
+
+.deuda{ font-size: 20px; margin-top: 24px; color: red;}
+
+.logo-section-in{
+    margin: 8px 0px;
+}
+.logos-info{
+    width: 176px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.logos-info img{
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius:50%;
+    margin: 0px 4px;
+}
+.logo-section-in > .logo{ overflow: hidden; width: 96px; margin: 0 auto;}
+.logo-section-in > .logo img{
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius:50%;
+    margin: 0px 4px;
+}
+
+.logo-head{ margin: 0 8px;}
+.logo-head img{ width: 30px; height: 30px; margin: 0px 4px;}
+
+.text-decoration-under{ padding: 10px 0px; border-bottom: 1px solid; border-top: 1px solid;}
+.margin-botton-100{ margin-bottom: 50px;}
+.margin-botton-20{ margin-bottom: 60px;}
+.icon-big{
+    font-size: 110pt;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+    padding: 12px 0px;
+}

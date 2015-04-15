@@ -1,0 +1,148 @@
+//
+   Created by fabiancote on 8/1/14.
+extends ../layout
+block content
+    include ../directorHead
+    .container
+        ul.breadcrumb
+            li: a(href="/director/profile") Inicio
+            li.active Preinscripcion
+        .row
+            .margin-auto
+                p.lead.text-center
+                    strong Solicitud de Preinscricion al postgrado
+                    span.text-primary &nbsp; #{postgrado.nombre} -
+                    strong.text-primary &nbsp; #{programa.nombre}
+                p.lead.text-center
+                    span.text-info Paso #1:
+                    span.text-muted &nbsp; Informacion de la solicitud de preinscripcion
+                    h5.text-center
+                        a(href="/postgrado/#{postgrado.id}").btn.btn-default.btn-xs
+                            i.fa.fa-chevron-circle-left
+                            | &nbsp; Volver al posgrado
+                .margin-botton
+                .well.bs-component
+                    .form-horizontal
+                        faildset
+
+                            .form-group
+                                label(for="nombre", class="col-lg-2 control-label") Fecha de Inscripcion
+                                .col-lg-10
+                                    h2.text-primary
+                                        i.fa.fa-calendar
+                                        | &nbsp; #{inscrito.fecha_incripcion.toISOString().slice(0, 10)}
+
+                            .form-group
+                                label(for="documento", class="col-lg-2 control-label") Identidad
+                                .col-lg-10
+                                    p.lead
+                                        span #{datos.documento}
+                                        br
+                                        span.text-muted #{datos.tipo_documento}
+
+
+                            .form-group
+                                label(for="nombre", class="col-lg-2 control-label") Nombre
+                                .col-lg-10
+                                    p.lead #{datos.nombres} #{datos.apellidos}
+
+
+
+
+                            -if (inscrito.estado == 0){
+
+                                .form-group
+                                    label(for="nombre", class="col-lg-2 control-label") Estado
+                                    .col-lg-10
+                                        p.label.label-warning Preinscrito
+                            -}
+                            -if (inscrito.estado == 1){
+                                .form-group
+                                    img(src="/images/uploads/supports/#{inscrito.id}.jpg", title="reporte de pago de #{datos.nombres} #{datos apellidos}")
+                                .form-group
+                                    label(for="nombre", class="col-lg-2 control-label") Estado
+                                    .col-lg-10
+                                        p.lead.text-success Inscrito
+                                .form-group
+                                    label(for="nombre", class="col-lg-2 control-label") Fecha de pago
+                                    .col-lg-10
+                                        p.label.label-success.font-size-fix-label
+                                            i.fa.fa-calendar
+                                            | &nbsp; #{inscrito.fecha_pago.toISOString().slice(0, 10)}
+                            -}
+
+                            -if (inscrito.estado == 1){
+                                legend
+                                p.lead.text-success Matricular al inscrito en cohorte
+                                -if(numcoh > 0){
+                                    form(method="POST", action="/cohorte/register").form-group
+                                        input(type="hidden", name="inscrito", value="#{inscrito.id}")
+                                        input(type="hidden", name="concepto", value="Pago de la matricula para el inicio del primer semestre del postgrado")
+                                        .form-group
+                                            label(for="cohorte", class="col-lg-2 control-label") Cohorte
+                                            .col-lg-10
+                                                .input-group
+                                                    span.input-group-addon
+                                                        i.fa.fa-gavel
+                                                    select#tipo(name="cohorte").form-control
+                                                        each  cohorte in cohortes
+                                                            option(value="#{cohorte.id}") #{cohorte.nombre}
+
+                                        -if (postgrado.tipo_postgrado == 'Máestria' ){
+                                            -if (postgrado.modo == 'Mixta'){
+                                                .form-group
+                                                    label(for="inputCreditos", class="col-lg-2 control-label") Modalidad Academica
+                                                    .col-lg-10
+                                                        .list-group
+                                                            .list-group-item
+                                                                input(type="radio", name="modalidad",value="Profundización", checked)
+                                                                span.text-primary.text-margin-left De Profundización.
+
+                                                            .list-group-item
+                                                                input(type="radio", name="modalidad",value="Investigación")
+                                                                span.text-primary.text-margin-left De Investigación
+                                            -}
+                                        -}
+                                        .form-group
+                                            p.text-center
+                                                button(type="submit").btn.btn-success
+                                                    i.fa.fa-pencil-square-o
+                                                    | &nbsp; Matricular Inscrito
+                                -}else{
+                                    h2.text-center
+                                        span.label.label-warning
+                                            i.fa.fa-warning
+                                            | &nbsp; Advertencia
+                                    p.text-center
+                                        em El sistema no identifica una cohorte existente en el postgrado.
+                                    p.text-center.text-muted
+                                        em Esto significa que no se puede realizar la inclusion del estudiante en el postgrado, asi este ya haya realizado el pago.
+                                -}
+                            -}
+
+                            legend
+                            .form-group
+                                label(for="documento", class="col-lg-2 control-label") Comentario
+                                .col-lg-10
+                                    p(align="justify"): em #{inscrito.comentario}
+                            legend
+
+                            -if (inscrito.estado == 0){
+                                p.text-center
+                                    a(href="/preinscripcion/#{inscrito.id}/report").btn.btn-primary
+                                        | &nbsp; Reportar Pago &nbsp;
+                                        i.fa.fa-arrow-right
+                            -}
+
+                -if (inscrito.estado == 0){
+                    .panel.panel-default
+                        .panel-body
+                            h3.lead.text-center
+                                span.text-danger Anulacion de Preinscripciones
+                            p.text-center
+                                em Este modulo le permitira la anulacion de preinscripciones al postgrado realizadas por las personas interezadas en el mismo.
+                            h3.text-center
+                                a(href="/preinscripcion/delete/#{inscrito.id}").btn.btn-danger.btn-lg
+                                    i.fa.fa-times
+                                    | &nbsp; Eliminar solicitud
+                -}

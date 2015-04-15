@@ -1,0 +1,104 @@
+extends ../layout
+block content
+    include ../directorHead
+    .row
+        .container
+            .col-sm-8
+                .panel.panel-default
+                    .panel-heading
+                        h4.pull-right
+                            a(href="/postgrado/#{programa.id}/new").btn.btn-primary.btn-xs
+                                i.fa.fa-plus
+                                | &nbsp; Crear nuevo posgrado
+                        h5
+                            i.fa.fa-mortar-board
+                            | &nbsp; Postgrados Registrados
+                            span.badge.margin-left-1 #{numpostgrados}
+                    .panel-body
+                        p.lead Lista de postgrados que se encuentran registrados en el programa
+                        .list-group
+                            -if (numpostgrados < 1){
+                                p.text-center.text-info No existen postgrados registrados en este programa.
+                            -}else{
+                                each postgrado in postgrados
+                                    .list-group-item
+                                        .list-group-item-heading
+                                            table.table.margin-botton-none
+                                                tr
+                                                    td(width="15%")
+                                                        h5.text-center.text-muted #{postgrado.registro_cal}
+                                                        p.text-center
+                                                            case postgrado.tipo_postgrado
+                                                                when 'Máestria'
+                                                                    span.label.label-danger #{postgrado.tipo_postgrado}
+                                                                when 'Especialización'
+                                                                    span.label.label-success #{postgrado.tipo_postgrado}
+                                                                when 'Doctorado'
+                                                                    span.label.label-warning #{postgrado.tipo_postgrado}
+                                                    td(width="65%")
+                                                        h4.text-primary #{postgrado.nombre}
+                                                        -if (postgrado.tipo_postgrado == 'Máestria'){
+                                                            h5.text-muted
+                                                                | Modalidad:
+                                                                span.label.label-default.margin-left-1 #{postgrado.modo}
+                                                        -}
+                                                    td(width="20%", align="center")
+                                                        blockquote
+                                                            a(href="/postgrado/#{postgrado.id}").btn.btn-default.btn-sm
+                                                                i.fa.fa-cog
+                                                                | &nbsp; Administrar
+                            -}
+            .col-sm-4
+                .col-lg-12
+                    .panel.panel-default
+                        .panel-body
+                            p.lead.text-center.text-muted Programa Academico
+                            h4.text-center #{programa.nombre}
+                            h5.text-center
+                                span.label.label-default
+                                    i.fa.fa-bookmark
+                                    | &nbsp; Departamento
+                            p.text-center Posgrados
+                            h2.text-center
+                                span.label.label-primary.text-size #{numpostgrados}
+                            .margin-botton
+                .col-lg-12
+                    .panel.panel-default
+                        .panel-body
+                            p.lead.text-center.text-muted Director Administrativo
+                            .profileAvatar
+                                .avatar
+                                    -if (avatar != false){
+                                        img(src="/images/uploads/people/#{user.id}.jpg", title="#{datos.nombres} #{datos.apellidos}", class="portrait")
+                                    -}else{
+                                        img(src="/images/uploads/people/empty.jpg", title="#{datos.nombres} #{datos.apellidos}", class="portrait")
+                                    -}
+                                .btnupload
+                                    script(type="text/javascript", src="/bootstrap/js/bootstrap-filestyle.min.js")
+                                    form(enctype =  "multipart/form-data", role="form", method="POST", action="/uploader")
+                                        input(type="hidden", name="estudiante", value="#{user.id}")
+                                        input(type="hidden", name="url", value="/director/profile")
+
+                                        .form-group
+                                            .row
+                                                .col-md-4
+                                                    input(type="file", class="filestyle", data-input="false", name="userPhoto", accept="image/jpeg")
+                                            .row
+                                                .col-md-4
+                                                    h5.text-center
+                                                        button(type="submit").btn.btn-primary.btn-sm.margin-btn-upload-student
+                                                            i.fa.fa-cloud-upload
+                                                            | &nbsp; Subir Foto
+                                    script(type="text/javascript").
+                                        $(":file").filestyle({input: false});
+
+                            h4.text-center.text-primary #{datos.nombres} #{datos.apellidos}
+                            h5.text-center
+                                span.label.label-warning
+                                    i.fa.fa-user
+                                    | &nbsp; Director de Programa
+
+
+
+
+

@@ -1,0 +1,39 @@
+extends ../layout
+block content
+    include ../directorHead
+    .container
+        ul.breadcrumb
+            li: a(href="/director/profile") Inicio
+            li: a(href="/asignatura/#{asignatura.id}") Asignatura
+            li.active Registrar docente
+        .row
+            .margin-auto
+                p.lead.text-center
+                    strong Registro de docente
+                    span.text-primary &nbsp; #{asignatura.nombre} -
+                    span.text-primary &nbsp; #{postgrado.nombre}
+                p.lead.text-center
+                    h5.text-center
+                        a(href="/asignatura/#{asignatura.id}").btn.btn-default.btn-xs
+                            i.fa.fa-chevron-circle-left
+                            | &nbsp; Volver a la asignatura
+                .margin-botton
+                .well.bs-component
+                    form(method="POST", action="/docente/select").form-horizontal
+                        input(type="hidden", name="asignatura", value="#{asignatura.id}")
+                        input(type="hidden", name="profesorbe", value="#{asignatura.profesor_id}")
+                        legend Seleccion de docente
+                        p.text-muted Seleccione de la siguente lista el docente que desea registrar en la asignatura
+                        .list-group.scroll-list
+                            each docente in docentes
+                                .list-group-item
+                                    input(type="radio", name="docente", value="#{docente.id}")
+                                    span.text-margin-left #{docente.nombre}
+                        legend
+                        .form-group
+                            h5.text-center
+                                button(type="submit").btn.btn-primary
+                                    i.fa.fa-plus
+                                    | &nbsp; Seleccionar Docente
+
+

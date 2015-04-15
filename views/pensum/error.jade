@@ -1,0 +1,18 @@
+extends ../layout
+block content
+    include ../directorHead
+    .container
+        ul.breadcrumb
+            li: a(href="/director/profile") Inicio
+        .row
+            .margin-auto
+                p.lead.text-center
+                    strong Registro de pensums
+                p.error.text-center # Error
+                p.lead.text-center
+                    | #{message}
+                    strong.text-danger  #{tnombre}
+                    | , verifique en el sistema o intente de nuevo.
+                p.text-center
+                    a(href="/postgrado/#{postgrado}").btn.btn-default Intentar de nuevo
+    br

@@ -1,0 +1,86 @@
+extends ../layout
+block content
+    include ../directorHead
+    .container
+        ul.breadcrumb
+            li: a(href="/director/profile") Inicio
+            li: a(href="/asignatura/#{asignatura.id}") Materia
+            li: a(href="/docente/#{docente.id}/#{asignatura.id}") Docente
+
+            li.active Asignacion de titulos academicos
+        .row
+            .margin-auto
+                p.lead.text-center
+                    strong Asignacion de titulos academicos al docente
+                    span.text-primary &nbsp; #{datos.nombres} #{datos.apellidos}
+                p.lead.text-center
+                    span.text-muted &nbsp; Informacion del titulo academico
+                h5.text-center.margin-botton
+                    a(href="/docente/#{docente.id}/#{asignatura.id}").btn.btn-default.btn-xs
+                        i.fa.fa-chevron-circle-left
+                        | &nbsp; Volver al docente
+
+                .well.bs-component
+                    form(method="POST", action="/titulo/create", id="form-new-titulo").form-horizontal
+                        input(type="hidden", name="docente", value="#{docente.id}")
+                        input(type="hidden", name="asignatura", value="#{asignatura.id}")
+                        legend Titulacion academica del docente
+                        fieldset
+                            .form-group
+                                label(for="inputTitulo", class="col-lg-2 control-label") Titulo
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-bookmark
+                                        input(type="text", name="titulo", autocomplete="off", required).form-control
+                                    p.text-muted Nombre de la titulacion obtenida por el docente al culminar los estudios
+                            .form-group
+                                label(for="inputTitulo", class="col-lg-2 control-label") Institucion
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-institution
+                                        input(type="text", name="universidad", autocomplete="off", required).form-control
+                                    p.text-muted Institucion Academica que le otorgo el titulo al docente
+
+                            .form-group
+                                h5.text-center
+                                    button(type="submit").btn.btn-primary
+                                        i.fa.fa-plus
+                                        | &nbsp; Agregar Titulo
+    script(type="text/javascript").
+        $(document).ready(function() {
+            $('#form-new-titulo')
+                .bootstrapValidator({
+                    excluded: ':disabled',
+                    feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        titulo: {
+                            validators: {
+                                notEmpty: {
+                                },
+                                stringLength: {
+                                    min: 6,
+                                    max: 30
+                                }
+                            }
+                        },
+                        universidad: {
+                            validators: {
+                                notEmpty: {
+                                },
+                                stringLength: {
+                                    min: 6,
+                                    max: 30
+                                }
+                            }
+                        }
+                    }
+            });
+        });

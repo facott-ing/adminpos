@@ -1,0 +1,36 @@
+extends ../layout
+block content
+    include ../adminHead
+    .container
+        ul.breadcrumb
+            li: a(href="/administrador/profile") Inicio
+            li: a(href="/programa/#{programa.id}") Programa
+            li.active Asignar director
+        .row
+            .margin-auto
+                p.lead.text-center
+                    strong Asignar un director al programa
+                    span.text-primary &nbsp; #{programa.nombre}
+                p.lead.text-center
+                    span.text-muted &nbsp; Seleccione una de las siguientes opciones
+                h5.text-center.margin-botton
+                    a(href="/programa/#{programa.id}/view").btn.btn-default.btn-xs
+                        i.fa.fa-chevron-circle-left
+                        | &nbsp; Volver al programa
+                .well.bs-comment
+                    legend Asignacion de directores a programas
+                    .margin-botton
+                    fieldset
+                        .form-group
+                            p.text-center
+                                a(href="/director/#{programa.id}/create").btn.btn-primary.btn-sm
+                                    i.fa.fa-plus
+                                    | &nbsp; Agregar un nuevo director
+                            p.text-muted.text-center Se ingresa un director nuevo al sistema y se asocia al programa
+                        .margin-botton
+                        .form-group
+                            p.text-center
+                                a(href="/director/select/#{programa.id}").btn.btn-default.btn-sm
+                                    i.fa.fa-bars
+                                    | &nbsp; Seleccionar de una lista de directores
+                            p.text-muted.text-center Se escoje de una lista de directores ya registrados con anterioridad

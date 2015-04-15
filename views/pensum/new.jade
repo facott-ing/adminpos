@@ -1,0 +1,106 @@
+extends ../layout
+block content
+    include ../directorHead
+    .container
+        ul.breadcrumb
+            li: a(href="/director/profile") Inicio
+            li: a(href="/postgrado/#{postgrado.id}") Postgrado
+            li.active Registro de pensum
+        .row
+            .margin-auto
+                p.lead.text-center
+                    strong Creacion de pensums
+                    span.text-primary &nbsp; #{postgrado.nombre}
+                    span.text-primary: strong &nbsp; #{programa.nombre}
+                p.lead.text-center
+                    span.text-info Paso #1:
+                    span.text-muted &nbsp; Informacion general del pensum
+                .well.bs-component
+                    form(method="POST", action="/pensum/create", id="form-new-pensum").form-horizontal
+                        input(type="hidden", name="programanom", value="#{programa.nombre}")
+                        input(type="hidden", name="postgradoid", value="#{postgrado.id}")
+                        input(type="hidden", name="postgradonom", value="#{postgrado.nombre}")
+                        faildset
+                            legend Registro de pensum
+                            .form-group
+                                label(for="inputResolucion", class="col-lg-2 control-label") Resolucion
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-key
+                                        input(type="text", name="resolucion", autofocus, autocomplete="off", required).form-control
+                                    p.text-muted Codigo de la resolucion del pensum
+                            .form-group
+                                label(for="inputNombre", class="col-lg-2 control-label") Nombre
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-bookmark
+                                        input(type="text", name="nombre", autocomplete="off", required).form-control
+                                    p.text-muted Nombre identificador del pensum
+                            .form-group
+                                label(for="inputfecha", class="col-lg-2 control-label") Fecha
+                                .col-lg-10
+
+                                    .input-group
+                                        span.input-group-addon
+                                            i.fa.fa-calendar
+                                        input(type="date", name="fecha", required, placeholder="DD/MM/YYYY").form-control
+                                    p.text-muted Fecha de la creacion del pensum
+                            legend
+                            .form-group
+                                .col-lg-10.col-lg-offset-2
+                                    a(href="/postgrado/#{postgrado.id}").btn.btn-default.margin-right-1
+                                        i.fa.fa-times-circle
+                                        | &nbsp; Cancelar
+                                    button(type="submit", class="btn btn-primary")
+                                        i.fa.fa-save
+                                        | &nbsp; Guardar pensum
+    script(type="text/javascript").
+
+        $(document).ready(function() {
+            $('#form-new-pensum')
+
+                .bootstrapValidator({
+                    excluded: ':disabled',
+                    feedbackIcons: {
+                        valid: 'glyphicon glyphicon-ok',
+                        invalid: 'glyphicon glyphicon-remove',
+                        validating: 'glyphicon glyphicon-refresh'
+                    },
+                    fields: {
+                        resolucion: {
+                            validators: {
+                                notEmpty: {
+                                },
+                                stringLength: {
+                                    min: 4,
+                                    max: 30
+                                }
+                            }
+                        },
+                        nombre: {
+                            validators: {
+                                notEmpty: {
+                                },
+                                stringLength: {
+                                    min: 3,
+                                    max: 30
+                                }
+                            }
+                        },
+                        fecha: {
+                            validators: {
+                                date: {
+                                        format: 'DD/MM/YYYY'
+                                    }
+                            }
+                        }
+                    }
+                });
+        });
+
+
+

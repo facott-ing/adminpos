@@ -1,0 +1,107 @@
+extends layout
+block content
+    .navbar.navbar-default
+        .container
+            .navbar-header
+                a(class="navbar-brand", href="")
+                    i.fa.fa-forumbee.text-primary
+                    span &nbsp; Admin
+                    span.text-primary Post
+                button(class="navbar-toggle", type="button", data-toggle="collapse", data-target="#navbar-main")
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+            .navbar-collapse.collapse.navbar-responsive-collapse
+                ul.nav.navbar-nav
+                    li
+                        a(href="/loginAdmin") Administrador
+                    li
+                        a(href="/login") Director
+                    li
+                        a(href="/loginTeach") Docente
+                    li.active
+                        a(href="/info")
+                            i.fa.fa-info-circle
+                            | &nbsp; Acerca de AdminPost
+    .container
+        .margin-auto-7.margin-botton-100
+            h1.text-center
+                i.fa.fa-forumbee.text-primary
+                span &nbsp; Admin
+                    span.text-primary Post
+            h3.text-center
+                span Bienvenido al sistema de administración de programas de posgrados de la
+                span.text-info &nbsp; UFPS,
+                span &nbsp; dirigido a los directores para la gestion de actividades curriculares y tareas administrativas de especializaciones, mastrias y doctorados.
+            .logos-info
+                a(href="http://ingsistemas.ufps.edu.co", target="_blank")
+                    img(src='/images/ing_sistemas_ufps.png', title='Departamento de sistemas e informatica')
+                a(href="http://www.ufps.edu.co", target="_blank")
+                    img(src='/images/logoufps.png', title='UFPS')
+        .row.margin-botton-20
+            .margin-auto-8
+                legend
+                .col-md-4.text-center
+                    i.fa.fa-question-circle.icon-big.text-info
+                .col-md-8
+                    h4.text-primary Que es AdminPost ?
+                    p.text-muted El Sistema AdminPost es una plataforma que permite a los directores de posgrados realizar un seguimiento y control sobre el cumplimiento de los requisitos de funcionamiento de cada programa de posgrado de las Facultades y Unidades Académicas de la Universidad Francisco de Paula Santander, las cuales no cuentan con un sistema informático que gestione de forma conjunta todos los posgrados, coordinando actividades tanto de gestión académica, administrativa y financiera.
+
+        .row.margin-botton-20
+            .margin-auto-8
+                .col-md-8
+                    h4.text-primary A quien va dirigido ?
+                    p.text-muted El sistema AdminPost esta dirigido a todas aquellas personas que cumplen el rol como directores de programas de posgrado y al personal encargado de la Oficina de Posgrados de la universidad francisco de Paula Santander.
+                .col-md-4.text-center
+                    i.fa.icon-big.text-info.fa-puzzle-piece
+
+        .row.margin-botton-20
+            .margin-auto-8
+                .col-md-4.text-center
+                    i.fa.fa-code.icon-big.text-info
+                .col-md-8
+                    h4.text-primary En que esta Desarrollado ?
+                    p.text-muted El Sistema AdminPost esta desarrollado en un entorno NodeJs como lo describe la pagina oficial de NodeJS es un entorno de programación en la capa del servidor basado en el lenguaje de programación ECMAScript, asíncrono en una arquitectura orientada a eventos y basado en el motor V8 de Google. de igual manera se utilizo el framework ExpressJS para la codificación de las interfaces y un gestor de base de datos MongoDB para el almacenamiento de la información.
+
+        .row.margin-botton-20
+            .margin-auto-8
+                .col-md-8
+                    .col-md-12
+                        h4.text-primary Grupo de Desarrollo ?
+                        p.text-mutedEl El sistema AdminPost es el resultado del trabajo de grado realizado por:
+                    .col-md-12
+                        .developerAvatar
+                            img(src="https://pbs.twimg.com/profile_images/488746508104511488/G7A2o24c.jpeg", title="Cesar Fabian Cote Guerrero")
+                            span.text-primary Cesar Fabian Cote Guerrero
+                            span.text-muted |
+                            span.text-muted
+                                a(href="mailto:fabiancote06@gmail.com", target="_blank")
+                                    i.fa.fa-lg.fa-envelope-square
+                                a(href="https://twitter.com/fabiancote06", target="_blank")
+                                    i.fa.fa-lg.fa-twitter-square
+                        .developerAvatar
+                            img(src="https://pbs.twimg.com/profile_images/2639391786/cb92fed2672c2a69e0b1a47568c66232.jpeg", title="Javier Eduardo Torres Gonsalez")
+                            span.text-primary Javier Eduardo Torres Gonzalez
+                            span.text-muted |
+                            span.text-muted
+                                a(href="mailto:raulmora@gmail.com", target="_blank")
+                                    i.fa.fa-lg.fa-envelope-square
+                                a(href="https://twitter.com/fabiancote06", target="_blank")
+                                    i.fa.fa-lg.fa-twitter-square
+                        .developerAvatar
+                            img(src="https://pbs.twimg.com/profile_images/2639391786/cb92fed2672c2a69e0b1a47568c66232.jpeg", title="Raul Antonio Mora Delgado")
+                            span.text-primary Raul Antonio Mora Delgado
+                            span.text-muted |
+                            span.text-muted
+                                a(href="mailto:javierserrot@gmail.com", target="_blank")
+                                    i.fa.fa-lg.fa-envelope-square
+                                a(href="https://twitter.com/fabiancote06", target="_blank")
+                                    i.fa.fa-lg.fa-twitter-square
+                .col-md-4.text-center
+                    i.fa.icon-big.text-info.fa-users
+
+        .margin-auto-7
+            legend
+            p.text-center
+                span.text-muted
+                    | AdminPost-UFPS &#169; 2015
